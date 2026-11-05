@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -201,8 +201,8 @@ x.fillStyle=`rgba(${k},.55)`;for(let i=0;i<cols;i++)for(let j=0;j<rows;j++)if(hs
 if(!rm){x.fillStyle='#E0A030';ps.forEach(p=>{const px=ox+(p.i+p.dx*p.t)*S,py=oy+(p.j+p.dy*p.t)*S;x.beginPath();x.arc(px,py,3.5,0,7);x.fill()})}}
 function step(){if(vis&&!document.hidden){ps.forEach(p=>{p.t+=.02;if(p.t>=1){p.i+=p.dx;p.j+=p.dy;p.t=0;const d=[[1,0],[-1,0],[0,1],[0,-1]].filter(v=>!(v[0]===-p.dx&&v[1]===-p.dy)&&p.i+v[0]>=0&&p.i+v[0]<cols&&p.j+v[1]>=0&&p.j+v[1]<rows),n=d[Math.floor(Math.random()*d.length)]||[1,0];p.dx=n[0];p.dy=n[1]}});draw()}raf=requestAnimationFrame(step)}
 size();const ro=new ResizeObserver(size);ro.observe(c);const io=new IntersectionObserver(e=>vis=e[0].isIntersecting);io.observe(c);if(!rm)raf=requestAnimationFrame(step);stop=()=>{cancelAnimationFrame(raf);ro.disconnect();io.disconnect()}}
-const root=document.documentElement;let th='light';try{th=localStorage.getItem('theme')||'light'}catch(e){}
-const setT=t=>{root.dataset.theme=t;$('#th').setAttribute('aria-pressed',t==='dark');try{localStorage.setItem('theme',t)}catch(e){}};
+const root=document.documentElement;let th='dark';try{th=localStorage.getItem('theme-pref')||'dark'}catch(e){}/* dark by default; new key so an older saved 'light' value does not override it */
+const setT=t=>{root.dataset.theme=t;$('#th').setAttribute('aria-pressed',t==='dark');try{localStorage.setItem('theme-pref',t)}catch(e){}};
 setT(th);$('#th').onclick=()=>setT(root.dataset.theme==='dark'?'light':'dark');
 $('#mb').onclick=e=>{const o=$('nav').classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};
 document.addEventListener('click',e=>{if(!e.target.closest('header')){$('nav').classList.remove('open');$('#mb').setAttribute('aria-expanded','false')}});
